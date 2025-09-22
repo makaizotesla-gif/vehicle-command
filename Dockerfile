@@ -15,3 +15,5 @@ FROM gcr.io/distroless/base-debian12:nonroot AS runtime
 COPY --from=build /app/build /usr/local/bin
 
 ENTRYPOINT ["tesla-http-proxy"]
+
+CMD ["--key-file", "/etc/secrets/private.pem"]
