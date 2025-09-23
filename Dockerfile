@@ -16,4 +16,4 @@ COPY --from=build /app/build /usr/local/bin
 
 ENTRYPOINT ["tesla-http-proxy"]
 
-CMD ["--key-file", "/etc/secrets/private.pem"]
+CMD ["--key-file", "/etc/secrets/private.pem", "--issuer", "https://fleet-api.prd.na.vn.cloud.tesla.com"]
