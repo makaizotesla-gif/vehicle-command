@@ -16,4 +16,4 @@ COPY --from=build /app/build /usr/local/bin
 
 ENTRYPOINT ["tesla-http-proxy"]
 
-CMD ["--key-file", "/etc/secrets/private.pem", "--listen", "0.0.0.0:10000"]
+CMD ["--key-file", "/etc/secrets/private-key.pem"]
