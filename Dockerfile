@@ -19,4 +19,5 @@ COPY --from=build /app/build/tesla-http-proxy /usr/local/bin/tesla-http-proxy
 # 実行バイナリをエントリポイントに指定
 ENTRYPOINT ["/usr/local/bin/tesla-http-proxy"]
 
-CMD ["--key-file=/etc/secrets/private.pem", "-port", "10000", "-host", "0.0.0.0", "-verbose"]
+# 起動前にファイル存在確認の簡易スクリプト
+ENTRYPOINT ["/bin/sh","-c","ls -l /etc/secrets/private.pem && /usr/local/bin/tesla-http-proxy --key-file /etc/secrets/private.pem -port 10000 -host 0.0.0.0 -verbose"]
