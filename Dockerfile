@@ -19,9 +19,6 @@ COPY --from=build /app/build/vehicle-command /usr/local/bin/vehicle-command
 # vehicle-command を直接エントリポイントに設定
 ENTRYPOINT ["/usr/local/bin/vehicle-command"]
 
-# 起動オプションを CMD で渡す
-CMD [
-  "--key-file", "/etc/secrets/private.pem",
-  "--endpoint", "https://fleet-api.prd.na.vn.cloud.tesla.com",
-  "--issuer", "https://fleet-api.prd.na.vn.cloud.tesla.com"
-]
+CMD ["--key-file=/etc/secrets/private.pem",
+     "--endpoint=https://fleet-api.prd.na.vn.cloud.tesla.com",
+     "--issuer=https://fleet-api.prd.na.vn.cloud.tesla.com"]
