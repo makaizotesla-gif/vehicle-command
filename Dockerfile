@@ -19,4 +19,4 @@ COPY --from=build /app/build/tesla-http-proxy /usr/local/bin/tesla-http-proxy
 # 実行バイナリをエントリポイントに指定
 ENTRYPOINT ["/usr/local/bin/tesla-http-proxy"]
 
-CMD ["--key-file=/etc/secrets/private.pem", "--endpoint=https://fleet-api.prd.na.vn.cloud.tesla.com", "--issuer=https://fleet-api.prd.na.vn.cloud.tesla.com"]
+CMD ["--key-file=/etc/secrets/private.pem", "-port", "3000", "-verbose"]
