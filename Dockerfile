@@ -22,4 +22,4 @@ ENTRYPOINT ["/usr/local/bin/tesla-http-proxy"]
 # CMD は TESLA_KEY_FILE を使うため --key-file 指定不要
 # -host 0.0.0.0 で Render からアクセス可能にする
 # -port は任意の固定値か、Render の環境変数 $PORT を使用
-CMD ["-port", "10000", "-host", "0.0.0.0", "-verbose"]
+CMD ["-port", "8080", "-host", "0.0.0.0", "-verbose"]
