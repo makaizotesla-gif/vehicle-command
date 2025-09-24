@@ -9,7 +9,7 @@ COPY . .
 
 RUN mkdir build
 # vehicle-command バイナリをビルド
-RUN go build -o ./build/vehicle-command ./cmd/vehicle-command
+RUN go build -o ./build/tesla-http-proxy ./cmd/tesla-http-proxy
 
 FROM gcr.io/distroless/base-debian12:nonroot AS runtime
 
