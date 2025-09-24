@@ -8,12 +8,20 @@ RUN go mod download
 COPY . .
 
 RUN mkdir build
-RUN go build -o ./build ./...
+# vehicle-command バイナリをビルド
+RUN go build -o ./build/vehicle-command ./cmd/vehicle-command
 
 FROM gcr.io/distroless/base-debian12:nonroot AS runtime
 
-COPY --from=build /app/build /usr/local/bin
+# ビルドしたバイナリをコピー
+COPY --from=build /app/build/vehicle-command /usr/local/bin/vehicle-command
 
-ENTRYPOINT ["tesla-http-proxy"]
+# vehicle-command を直接エントリポイントに設定
+ENTRYPOINT ["/usr/local/bin/vehicle-command"]
 
-CMD ["--key-file", "/etc/secrets/private-key.pem"]
+# 起動オプションを CMD で渡す
+CMD [
+  "--key-file", "/etc/secrets/private.pem",
+  "--endpoint", "https://fleet-api.prd.na.vn.cloud.tesla.com",
+  "--issuer", "https://fleet-api.prd.na.vn.cloud.tesla.com"
+]
