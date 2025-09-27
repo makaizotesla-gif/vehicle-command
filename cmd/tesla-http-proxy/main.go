@@ -147,7 +147,20 @@ func main() {
 	// method of your implementation can perform your business logic and then, if the request is
 	// authorized, invoke p.ServeHTTP. Finally, replace p in the below ListenAndServeTLS call with
 	// an object of your newly created type.
-	log.Error("Server stopped: %s", http.ListenAndServeTLS(addr, httpConfig.certFilename, httpConfig.keyFilename, p))
+	//log.Error("Server stopped: %s", http.ListenAndServeTLS(addr, httpConfig.certFilename, httpConfig.keyFilename, p))
+	if httpConfig.certFilename == "" || httpConfig.keyFilename == "" {
+		// Render 用: HTTP モードで起動
+		log.Infof("Starting proxy in HTTP mode on %s (Render provides TLS)", addr)
+		err = http.ListenAndServe(addr, p)
+	} else {
+		// ローカル用: 証明書を指定して HTTPS モードで起動
+		log.Infof("Starting proxy in HTTPS mode on %s", addr)
+		err = http.ListenAndServeTLS(addr, httpConfig.certFilename, httpConfig.keyFilename, p)
+	}
+
+	if err != nil {
+		log.Errorf("Server stopped: %s", err)
+	}
 }
 
 // readConfig applies configuration from environment variables.
