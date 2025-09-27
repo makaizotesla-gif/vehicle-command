@@ -150,11 +150,11 @@ func main() {
 	//log.Error("Server stopped: %s", http.ListenAndServeTLS(addr, httpConfig.certFilename, httpConfig.keyFilename, p))
 	if httpConfig.certFilename == "" || httpConfig.keyFilename == "" {
 		// Render 用: HTTP モードで起動
-		log.Printf("Starting proxy in HTTP mode on %s (Render provides TLS)", addr)
+		log.Info("Starting proxy in HTTP mode on %s (Render provides TLS)", addr)
 		err = http.ListenAndServe(addr, p)
 	} else {
 		// ローカル用: 証明書を指定して HTTPS モードで起動
-		log.Printf("Starting proxy in HTTPS mode on %s", addr)
+		log.Info("Starting proxy in HTTPS mode on %s", addr)
 		err = http.ListenAndServeTLS(addr, httpConfig.certFilename, httpConfig.keyFilename, p)
 	}
 
